@@ -1,0 +1,12 @@
+{
+  "name": "MyCRM Service",
+  "version": "1.0",
+  "decription": "hahsdhsadhdahd",
+  "ServiceRepo": "https://github.com/markbgrdt/mcs/tree/master/azure-applications/managedCRM",
+  "publisher": {
+    "name": "Mark Bongardt",
+    "org": "PU Public Cloud - Strategy"
+  },
+  "catalog": "tsi",
+  "platform": "azure"
+}
