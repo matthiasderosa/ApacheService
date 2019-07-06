@@ -162,6 +162,9 @@
          "type": "Microsoft.Compute/virtualMachines",
          "name": "[concat(variables('virtualMachineBaseName'),copyIndex(1))]",
          "location": "[parameters('location')]",
+         "tags": {
+           "playbooks": "apache"
+         },
          "copy": {
             "name": "vmCopy",
             "count": "[parameters('vmcount')]"
