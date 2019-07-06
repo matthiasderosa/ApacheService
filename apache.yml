@@ -22,7 +22,12 @@
       lineinfile: dest=/etc/apache2/ports.conf regexp="^Listen " line="Listen {{ http_port }}" state=present
       notify:
         - restart apache2
-
+        
+    - name: Removing
+       file:
+         path: /var/www/html
+         state: absent
+ 
     - name: clone basic html template
       git: repo=https://github.com/markbgrdt/MCSwebsite.git dest=/var/www/html update=no
 
