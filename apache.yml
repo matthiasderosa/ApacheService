@@ -24,9 +24,9 @@
         - restart apache2
         
     - name: Removing
-       file:
-         path: /var/www/html
-         state: absent
+      file:
+        path: /var/www/html
+        state: absent
  
     - name: clone basic html template
       git: repo=https://github.com/markbgrdt/MCSwebsite.git dest=/var/www/html update=no
