@@ -1,0 +1,62 @@
+---
+
+- hosts: localhost
+  become: True
+#
+# Installing Elasticsearch
+#
+# Adds the apt-key for Metricbeat 
+  tasks:
+    - name: Add Elasticsearch apt-key
+      apt_key:
+       url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+       state: present
+# Add the Elasticsearch APT-repository
+    - name: Adding Elasticsearch APT repository
+      apt_repository:
+       repo: deb https://artifacts.elastic.co/packages/oss-6.x/apt stable main
+       state: present
+# Install Elasticsearch
+    - name: Update repositories cache and install Elasticsearch
+      apt:
+       name: metricbeat
+       update_cache: yes
+# Update Elasticsearch config file to only allow localhost connections
+    - name: Delete existing conf file
+      file:
+        path: "/etc/metricbeat/metricbeat.yml"
+        state: absent
+     # become: true
+# Create a empty file for configuratoin
+    - name: Create a new blank configuration file
+      file:
+        path: "/etc/metricbeat/metricbeat.yml"
+        state: touch
+        mode: 0644
+        owner: root
+        group: root
+        #become: true
+    - name: Configure MetricBeat
+      blockinfile:
+       path: "/etc/metricbeat/metricbeat.yml"
+       block: | 
+         metricbeat.config.modules:
+           path: ${path.config}/modules.d/*.yml
+           reload.enabled: false
+         setup.template.settings:
+           index.number_of_shards: 1
+           index.codec: best_compression
+         setup.kibana:
+         output.elasticsearch:
+           hosts: ["52.28.59.244:9200"] 
+           protocol: "http"
+           username: "es-data"
+           password: "D@t@D3v"
+         processors:
+          - add_host_metadata: ~
+          - add_cloud_metadata: ~
+# Restart Elasticsearch
+    - name: Restarting Elasticsearch
+      service:
+        name: metricbeat
+        state: restarted
