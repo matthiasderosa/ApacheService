@@ -1,4 +1,5 @@
 import requests
+from requests.auth import HTTPDigestAuth
 import json
 import os
 
@@ -26,7 +27,7 @@ def updateService(auth_token):
         service = json.load(service_description)
     # Prepare request body to update service. Most of the parameters are identical to the service.json file.
     # However, we need to inject the repo link and branch from CircleCI environment variables
-    body = {'name': service['name'],'version': service['version'],'description': service['description'],'sourceurl': os.environ['REPO_LINK'],'branchtag': os.environ['BRANCH']}
+    body = {'name': service['name'],'version': service['version'],'description': service['description'],'sourceurl': os.environ['CIRCLE_REPOSITORY_URL'],'branchtag': os.environ['CIRCLE_BRANCH']}
     # Update an existing service, identified by the serviceID in service.json. This method requires a valid auth token which was created in the login_HMCM() function
     update_request = requests.put(base_url + "/api/v1/catalog/service/" + service['serviceid'], headers={'Authorization': 'Bearer ' + auth_token}, json = body)
     # For successful API call, response code will be 200 (OK)
