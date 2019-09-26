@@ -23,7 +23,7 @@ def login_HMCM():
 
 def updateService(auth_token):
     # Load service.json file to get description of service
-    with open('../service.json') as service_description:
+    with open('service.json') as service_description:
         service = json.load(service_description)
     # Prepare request body to update service. Most of the parameters are identical to the service.json file.
     # However, we need to inject the repo link and branch from CircleCI environment variables
