@@ -1,0 +1,10 @@
+{
+    "name": "drazanpremium Service",
+    "description": "website",
+    "version": "1.0",
+    "serviceid": "7",
+    "landscapeid": "2",
+    "target": "azure",
+    "owner": "Mark Bongardt",
+    "publisher": "TSI"
+}
