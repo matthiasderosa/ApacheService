@@ -1,7 +1,7 @@
 {
     "name": "markspipe1",
     "description": "website",
-    "version": "1.0",
+    "version": "2.0",
     "serviceid": "7",
     "landscapeid": "2",
     "target": "azure",
