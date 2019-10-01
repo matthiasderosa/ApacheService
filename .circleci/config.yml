@@ -3,6 +3,9 @@
    build:
      docker:
        - image: circleci/python:3.6
+     branches:
+      only:
+        - master
      steps:
        - checkout
        - run: python .circleci/updateService.py
